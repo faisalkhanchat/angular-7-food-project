@@ -1,0 +1,20 @@
+/* You can add global styles to this file, and also import other style files */
+.dropdown.show .dropdown-menu{
+    display: block;
+}
+.dropdown .dropdown-menu {
+    left: auto !important;
+    right: 0px;
+}
+.navbar{
+    margin-bottom: 20px;
+}
+img{
+    max-width: 100%;
+    max-height: 10  0%;
+}
+.list-group {display: block;}
+.list-group>li{list-style: none;;}
+.btn-group.show .dropdown-menu{
+    display: inline-block;
+}
