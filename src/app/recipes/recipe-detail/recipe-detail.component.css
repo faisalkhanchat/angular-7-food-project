@@ -1,3 +1,6 @@
 .dropdown {    
     display: inline-block;
 }
+.dropdown-item{
+    cursor: pointer;
+}

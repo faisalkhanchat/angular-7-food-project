@@ -18,3 +18,10 @@ img{
 .btn-group.show .dropdown-menu{
     display: inline-block;
 }
+.list-group-item{
+    cursor: pointer;
+    &:hover{
+        
+    }
+}
+a{cursor: pointer;}
