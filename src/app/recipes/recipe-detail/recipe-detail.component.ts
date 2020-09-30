@@ -23,7 +23,7 @@ export class RecipeDetailComponent implements OnInit {
         }
       );
   }
-  editRecipe() {
+  editRecipe(id) {
     this.router.navigate(['edit'], {relativeTo: this.route});
     // this.router.navigate(['../', this.id, 'edit'], {relativeTo: this.route});
   }
