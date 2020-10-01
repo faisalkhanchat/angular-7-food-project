@@ -1,5 +1,8 @@
-import { CrudService } from './../crud.service';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { User } from './model/user.model';
+import { CrudService } from './services/crud.service';
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-angular-firebase-crud',
@@ -8,22 +11,29 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AngularFirebaseCrudComponent implements OnInit {
 
-  constructor(
-    private crudService: CrudService
-  ) { }
+  // userList: User;
+  public items: Observable<any[]>;
 
+  constructor(
+    public db: AngularFirestore,
+    private crudService: CrudService) {
+        this.items = db.collection('/users').valueChanges();
+        console.log(this.items);
+
+  }
   ngOnInit(): void {
 
-
+    this.getRecord();
   }
 
 
 
   createRecord() {
+
     let record = {
       name: 'Faisal khan',
-      mobile: '9873635068',
       email: 'faisalkhan.chat@gmail.com',
+      mobile: '9873635068',
       password: 'ertyuiosdfghjk'
     };
 
@@ -33,6 +43,15 @@ export class AngularFirebaseCrudComponent implements OnInit {
       .catch(error => {
         console.log(error);
       });
+  }
+
+
+  getRecord() {
+    this.crudService.read_user().subscribe(data => {
+      console.log(data);
+    });
+
+
   }
 
 

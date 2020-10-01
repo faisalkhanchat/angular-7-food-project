@@ -15,7 +15,7 @@ export class CrudService {
   }
 
   read_user() {
-    return this.firestore.collection('users').snapshotChanges();
+    return this.firestore.collection('/users').valueChanges();
   }
 
   update_user(recordID, record) {
