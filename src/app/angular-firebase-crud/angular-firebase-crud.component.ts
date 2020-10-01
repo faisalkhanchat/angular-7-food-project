@@ -23,7 +23,8 @@ export class AngularFirebaseCrudComponent implements OnInit {
     let record = {
       name: 'Faisal khan',
       mobile: '9873635068',
-      email: 'faisalkhan.chat@gmail.com'
+      email: 'faisalkhan.chat@gmail.com',
+      password: 'ertyuiosdfghjk'
     };
 
     this.crudService.create_user(record).then(resp => {
