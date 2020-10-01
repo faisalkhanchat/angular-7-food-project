@@ -7,15 +7,17 @@ import { RecipeStartComponent } from './recipes/recipe-start/recipe-start.compon
 import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
 
 const inrRoute: Routes = [
+    { path: 'curd', loadChildren: () => import('./angular-firebase-crud/angular-firebase-crud.module').then(m => m.AngularFirebaseCrudModule) },
     { path: '', redirectTo: 'recipes', pathMatch: 'full' },
-    { path: 'recipes', component: RecipesComponent, children: [
-        {path: '', component: RecipeStartComponent},
-        {path: 'new', component: RecipeEditComponent},
-        {path: ':id', component: RecipeDetailComponent},
-        {path: ':id/edit', component: RecipeEditComponent}
-    ]},
+    {
+        path: 'recipes', component: RecipesComponent, children: [
+            { path: '', component: RecipeStartComponent },
+            { path: 'new', component: RecipeEditComponent },
+            { path: ':id', component: RecipeDetailComponent },
+            { path: ':id/edit', component: RecipeEditComponent }
+        ]
+    },
     { path: 'shopping-list', component: ShoppingListComponent },
-    { path: 'curd', component: ShoppingListComponent },
 
 ];
 

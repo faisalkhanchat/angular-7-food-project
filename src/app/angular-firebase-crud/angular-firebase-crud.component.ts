@@ -1,3 +1,4 @@
+import { CrudService } from './../crud.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +8,31 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AngularFirebaseCrudComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private crudService: CrudService
+  ) { }
 
   ngOnInit(): void {
+
+
   }
+
+
+
+  createRecord() {
+    let record = {
+      name: 'Faisal khan',
+      mobile: '9873635068',
+      email: 'faisalkhan.chat@gmail.com'
+    };
+
+    this.crudService.create_user(record).then(resp => {
+      console.log(resp);
+    })
+      .catch(error => {
+        console.log(error);
+      });
+  }
+
 
 }
