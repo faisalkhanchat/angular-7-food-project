@@ -1,0 +1,159 @@
+<!-- 
+  use class for hide buttons 
+
+  show_add
+  show_export
+  show_filter
+  show_all
+
+ -->
+<div class="search-header-box" [ngClass]="cls">
+    <app-search-filter [placeholder]="placeholder" (appSearch)="searchEvent($event)"></app-search-filter>
+  <div class="filter-icons">
+    <button mat-fab color="primary" class="add" (click)="optional('ADD')">add</button>
+    <button mat-fab color="primary" class="export" (click)="optional('EXPORT')">archive</button>
+    <button mat-fab color="primary" class="filter" (click)="openFilter()">filter_list</button>
+  </div>
+  <!-- row close -->
+
+  <div class="filter-wrapper" [class.open]="isFilterOpen">
+    <div class="overlay"></div>
+    <div class="filter-inner-box">
+      <div class="filter-header">
+        <h3>Filter</h3>
+        <button class="filter_close" type="button" (click)="isFilterOpen=false" matRipple>
+          <mat-icon>close</mat-icon>
+        </button>
+      </div>
+      <div class="filter-box">
+        <ng-content></ng-content>
+        <div class="filter-btn">
+          <button type="button" (click)="filterOption(0)" mat-stroked-button>Reset</button>
+          <button type="button" (click)="filterOption(1)" mat-raised-button color="primary">Apply</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <div class="table-wrapper">
+    <table 
+      mat-table 
+      [dataSource]="dataSource" 
+      matSort matSortStart="desc" 
+      class="mat-elevation-z1" 
+      matSortDisableClear
+      (matSortChange)="sortingData($event)"
+      >
+      <ng-container *ngFor="let row of heading" [matColumnDef]="row.heading">
+        <!-- <ng-container matColumnDef="position"> -->
+          
+        <th mat-header-cell *matHeaderCellDef mat-sort-header [disabled]="!row.sort" [ngClass]="[row.class ? row.class : '', row.type=='action' ? 'table-action' : '']" >{{row.heading}}  </th>
+
+        <td mat-cell *matCellDef="let element;let i=index" [ngClass]="[row.class ? row.class : '', row.type=='action' ? 'table-action' : '']">
+
+          <ng-container [ngSwitch]="row.type">
+            <ng-container *ngSwitchCase="'action'">
+              <div class="action-btn">
+                <ng-container *ngFor="let sta of row.action">
+
+                  <!-- for status -->
+                  <button type="button" *ngIf="sta==1" [matTooltip]="element.status==1?'Deactivate':'Activate'"
+                    (click)="tableAction(1,element,i)" [ngClass]="{'block-active': element.status==1}"
+                    class="btn" mat-icon-button  >
+                    <mat-icon>block</mat-icon>
+                  </button>
+                  
+                  <!-- for edit -->
+                  <button type="button" *ngIf="sta==3" (click)="tableAction(2,element,i)" class="btn" mat-icon-button>
+                    <mat-icon matTooltip="Edit">edit</mat-icon>
+                  </button>
+                  
+                  <!-- for delete -->
+                  <button type="button" *ngIf="sta==2" (click)="tableAction(0,element,i)" class="btn" mat-icon-button>
+                    <mat-icon matTooltip="Delete">delete</mat-icon>
+                  </button>
+                  
+                  <!-- Mark as Recommeded -->
+                  <button type="button" *ngIf="sta==4" [matTooltip]="element.isRecommended?'Remove from Recommeded':'Mark as Recommeded'"
+                    (click)="tableAction(3,element,i)" [ngClass]="{'active': element.isRecommended, 'input': element.input}"
+                    class="recommended" mat-icon-button  >
+                    <mat-icon>thumb_up</mat-icon>
+                  </button>
+                  
+                  <!-- Mark as popular -->
+                  <button type="button" *ngIf="sta==5" [matTooltip]="element.isPopular?'Remove from Popular':'Mark as Popular'"
+                    (click)="tableAction(4,element,i)" [ngClass]="{'active': element.isPopular, 'input': element.input}"
+                    class="popular" mat-icon-button  >
+                    <mat-icon>{{ element?.isPopular ? 'star' : 'star_border' }}</mat-icon>
+                  </button>
+                 
+                </ng-container>
+              </div>
+            </ng-container>  
+
+            <ng-container *ngSwitchCase= "'input'">
+              <ng-container *ngTemplateOutlet="Template;context: {$implicit: element.group}"></ng-container>
+            </ng-container>
+
+            <ng-container *ngSwitchCase= "'tooltip'">
+              <span [matTooltip]="element[row.key] ? element[row.key] :''">{{element[row.key] ? element[row.key] :'N/A'}}</span>
+            </ng-container>
+
+            <ng-container *ngSwitchCase="'link'">
+              <a [routerLink]="[row.link+'/'+element._id]">
+                {{element[row.key]?element[row.key]:'N/A'}}
+              </a>
+            </ng-container>
+
+            <ng-container *ngSwitchCase="'date'">
+              {{element[row.key]? (element[row.key] | date:'d MMM y'):'N/A'}}
+            </ng-container>
+
+            <ng-container *ngSwitchCase="'dateTime'">
+              {{element[row.key]? (element[row.key] | date:'short'):'N/A'}}
+            </ng-container>
+
+            <ng-container *ngSwitchCase="'status'">
+               <span class="{{element[row.key] ? element[row.key] :'N/A'}}"> {{element[row.key] ? element[row.key] :'N/A'}} </span>
+            </ng-container>
+
+            <ng-container *ngSwitchCase="'price'">
+              {{element[row.key]?(element[row.key] | currency:'INR'):'N/A'}}
+            </ng-container>
+
+            <ng-container *ngSwitchCase="'location'">
+              <span matTooltip="{{element[row.key]? (element[row.key]['addressLine1'] + '-' + element[row.key]['addressLine2'] + ' ' + 
+              element[row.key]['city'] + ' ' + element[row.key]['country'] + ' ' + element[row.key]['pincode'] + ' '
+              + element[row.key]['state']) : '-'}}">{{element[row.key]? (element[row.key]['addressLine1'] + '-' + element[row.key]['addressLine2'] + ' ' + 
+                  element[row.key]['city'] + ' ' + element[row.key]['country'] + ' ' + element[row.key]['pincode'] + ' '
+                  + element[row.key]['state']) : '-'}}
+              </span>
+            </ng-container>
+
+            <!-- normal text -->
+            <ng-container *ngSwitchDefault>
+              {{element[row.key]?element[row.key]:(element[row.key]==0?0:'N/A')}}
+            </ng-container>
+          </ng-container>
+        </td>
+        <!-- </ng-container> -->
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="matHeaderRow"></tr>
+      <tr mat-row *matRowDef="let row; columns: matHeaderRow;"></tr>
+    </table>
+  </div>
+ 
+    <ng-container *ngIf="paginationOn && numberOfData;else noDataFound">
+      <mat-paginator [length]="total" [pageSize]="limit" [pageSizeOptions]="[10, 25, 50, 100]"
+        (page)="onPageHandler($event)" showFirstLastButtons></mat-paginator>
+    </ng-container>
+
+<ng-template #noDataFound>
+  <div class="_tableNoData" *ngIf="numberOfData==0">
+    <p>Currently we didn't find any data.</p>
+  </div>
+</ng-template>
+  

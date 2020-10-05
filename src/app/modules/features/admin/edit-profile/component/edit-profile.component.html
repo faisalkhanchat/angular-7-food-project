@@ -1,0 +1,42 @@
+<div class="mat-card page-heading">
+  <div class="mat-title">Edit Profile</div>
+</div>
+
+<div class="mat-card">
+<form [formGroup]="editProfileForm" (ngSubmit)="editProfile()">
+    <div class="row">
+      <div class="col-sm-3">
+        <div class="img">
+          <img [src]="profilePicURL||'http://design.applaurels.com/u_placeholder.jpg'" alt="">
+          <!-- <mat-spinner *ngIf="imgLoader" [diameter]="40"></mat-spinner> -->
+          <button type="button" mat-mini-fab color="primary">
+            <mat-icon>camera_alt</mat-icon>
+            <input type="file" accept="image/x-png,image/jpeg" (change)="onSelectFile($event)"
+              matTooltip="Change Image" />
+          </button>
+        </div>
+      </div>
+      <div class="col-md-9">
+        <div class="row admin-info">
+          <div class="col-sm-6">
+            <mat-form-field>
+              <input matInput formControlName="name" placeholder="Name" value="John Carter">
+              <mat-error>{{getControl('name')|validate:'name'}}</mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-sm-6">
+            <mat-form-field>
+              <input matInput placeholder="Email" formControlName="email" readonly>
+              <mat-error>{{getControl('email')|validate:'email'}}</mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+
+      </div>
+    </div>
+        <div class="form-btn">
+          <button mat-raised-button [routerLink]="['SETTINGS'|absolutePath]">Cancel</button>
+          <button mat-raised-button color="primary">Update</button>
+        </div>
+      </form>
+    </div>

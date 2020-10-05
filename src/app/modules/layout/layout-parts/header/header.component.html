@@ -1,0 +1,20 @@
+<header class="header_inr">
+  <div  routerLink="/" class="logo"> Angular RCC </div>
+  <div class="dropdown_menu">
+      <button mat-icon-button><mat-icon>notifications</mat-icon></button>
+      <button class="setting_menu" mat-button  [matMenuTriggerFor]="menu">
+          <div class="inr_wrap">
+              <img [src]="headerResponse?.image ? headerResponse?.image : 'assets/default-image/user_placeholder.svg'" alt="">
+              <span class="name">{{headerResponse?.name}}</span>
+              <mat-icon>keyboard_arrow_down</mat-icon>
+          </div>
+      </button>
+      <mat-menu #menu="matMenu" xPosition="before">
+          <button class="drop-menu" mat-menu-item [routerLink]="['ADMIN_PROFILE' | absolutePath]" > <mat-icon>person</mat-icon> My Profile </button>
+          <button class="drop-menu" mat-menu-item [routerLink]="['ADMIN_CHANGE_PASSWORD' | absolutePath]" > <mat-icon>lock</mat-icon> Change Password </button>
+          <button class="drop-menu" mat-menu-item (click)="logout()" > <mat-icon>power_settings_new</mat-icon> Logout </button>
+      </mat-menu>
+  </div>
+
+</header>
+  

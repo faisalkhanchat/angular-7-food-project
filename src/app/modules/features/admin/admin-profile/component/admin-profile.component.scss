@@ -1,0 +1,6 @@
+@import 'grid';
+@import 'mix';
+@include page-heading;
+@include info_data;
+@include img(200px, 200px, cover, 3px);
+@include form-btn(center); 

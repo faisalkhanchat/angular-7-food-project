@@ -1,0 +1,59 @@
+@import 'var';
+.mat-nav-list .mat-list-item{
+    border-bottom: 1px solid rgba(var(--primary), 0.05 );
+    .mat-icon{
+        background-color: rgba(var(--primary), 0.2);
+        width: 35px;
+        height: 35px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 10px;
+        border-radius: 3px;
+    }
+    &.active{
+        background-color: rgba(var(--primary), 0.2 );
+    }
+}
+
+// MAT EXPANSION PANEL 
+
+// ::ng-deep{
+//     .mat-nav-list .mat-expansion-panel{
+//         background: transparent;
+//         border-radius: 0 ;
+//         box-shadow: none !important;
+//         &.mat-expanded{
+//             margin-bottom: 10px;
+//             background: inherit;
+//         }
+//         .mat-expansion-panel-header{
+//             padding: 0;
+//             border-radius: 0;
+//             position: relative;
+            
+//             .mat-expansion-indicator{
+//                 transform: rotate(0deg);
+//                 position: absolute;
+//                 right: 10px;
+//                 top: calc(50% - 0);
+//                 width: 10px;
+//                 height: 10px;
+//                 display: inline-block;
+//                 &::after {
+//                     position: absolute;
+//                     top: 0;
+//                     left: 0;
+//                 }
+//             }
+//         }
+//         .mat-expansion-panel-body{
+//             padding: 0 !important;
+//             .mat-list-item{
+//                 padding-left: 10px;
+//                 &::before{display: none}
+//             }
+//         }
+       
+//     }
+// }

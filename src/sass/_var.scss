@@ -1,0 +1,72 @@
+:root {
+    // default colors
+    --blue: #007bff;
+    --indigo: #6610f2;
+    --purple: #6f42c1;
+    --pink: #e83e8c;
+    --red: #dc3545;
+    --orange: #fd7e14;
+    --yellow: #ffc107;
+    --green: #28a745;
+    --teal: #20c997;
+    --cyan: #17a2b8;
+    --gray: #6c757d;
+    --gray-dark: #343a40;
+    --primary: #007bff;
+    --secondary: #6c757d;
+    // status colors
+    --success: #28a745;
+    --info: #17a2b8;
+    --warning: #ffb229;
+    --danger: #dc3545;
+    --light: #f8f9fa;
+    --dark: #343a40;
+    --white: #ffffff;
+    --black: #000000;
+    --breakpoint-xs: 0;
+    --breakpoint-sm: 576px;
+    --breakpoint-md: 768px;
+    --breakpoint-lg: 992px;
+    --breakpoint-xl: 1200px;
+    --breakpoint-xxl: 1600px;
+    --font-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI";
+    --font-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
+ :root {
+    // #, rgba, rgba
+    // set primary & secondary color 
+    --color-code: 45, 51, 102; // primary color code in rgb
+    --primary: rgb(var(--color-code));
+    --primary-light: rgba(var(--color-code2), 0.6);
+    --color-code2: 247, 73, 83; // secondary color code in rgb
+    --secondary: rgb(var(--color-code2));
+    --secondary-light: rgba(var(--color-code2), 0.6);
+    // set for big screen font
+    @media (min-width: var(--breakpoint-xxl)) {
+        font-size: 16px;
+    }
+    font-size: 14px;
+    // set font
+    --font: 'Gilroy',
+    sans-serif;
+}
+
+// all app colors
+html {
+    --bnr-color: #ffffff;
+    --logo-bg-color: #ebecf3;
+    --small-color: #6e7594;
+    --landing-bg-color: #f3f3f7;
+    --step-bg-color: #e2e3ea;
+    --step-text-color: rgba(110, 117, 148, 0.5);
+    --color-para-light: #6e7594;
+    --page-heading-border: #e2e2ed;
+    --c-f2: #f2f2f2;
+    --details-color: #111662;
+}
+
+// for dark mode colors
+html[dark] {
+    
+}

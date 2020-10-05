@@ -1,0 +1,53 @@
+@import 'mix';
+.logo{
+    outline: none;
+    cursor: pointer;
+}
+.header_inr{
+    @include flex(center, space-between);
+    flex: 1;
+    .dropdown_menu{
+        @include flex(center, initial);
+        margin-right: 15px;
+    }
+    
+}
+.setting_menu{
+    padding: 0;
+    border-radius: 30px;
+    padding: 2px;
+    margin-left: 10px;
+    background-color:rgba(var(--primary), 0.1);
+    .inr_wrap{
+        @include flex(center, initial);
+        padding-right: 10px;
+        img{
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 2px 0 2px;
+        }
+        .name{
+            max-width: 100px;
+            font-size: 14px;
+            white-space: nowrap;
+            display: inline-block;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            margin: 0 5px 0 10px;
+            @media (max-width:576px) {
+                display: none;
+            }
+        }
+    }
+}
+.mat-icon-button {
+    background-color:rgba(var(--white), 0.1);
+}
+
+::ng-deep {
+     .drop-menu.mat-menu-item{
+        min-width: 220px;
+    }
+}

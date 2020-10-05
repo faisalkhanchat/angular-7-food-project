@@ -1,0 +1,70 @@
+@import 'grid';
+@import 'mix';
+
+.arrow {
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    z-index: 1;
+    height: 20px;
+    width: 35px;
+    opacity: 1;
+    width: 1px;
+    transition: .3s ease width;
+    img {
+        text-align: right;
+    }
+}
+
+.mat-card{
+    margin-bottom: 20px;
+    text-align: center;
+    border-left: 6px solid #333333;
+    overflow: hidden;
+    cursor: pointer;
+    transition: .3s ease-in-out all;
+    &.green {
+        border-color: $green;
+        background-color: rgba($green, 0.1);
+    }
+    &.red {
+        border-color: $red;
+        background-color: rgba($red, 0.1);
+    }
+    h3 {
+        font-weight: 500;
+        font-size: 16px;    
+    }
+    .el-value {
+        font-weight: 500;
+        font-size: 14px;
+    }
+    &:hover {
+        box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
+    }
+}
+
+
+
+
+.card_animation {
+    .mat-card {
+        position: relative;
+        &::before {
+            content: '';
+            position: absolute;
+            top: -70px;
+            left: 0;
+            content: '';
+            width: 200%;
+            height: 200%;
+            background-image: linear-gradient(60deg, rgba(#000000,0) 20%, rgba(#000000,.05), rgba(#000000,0) 80%);
+            transform: translateX(-100%);
+        }
+        &:hover::before {
+            transform: translateX(100%);
+            transition: all 1.2s ease-in-out;
+        }
+
+    }
+}

@@ -1,0 +1,196 @@
+<div class="mat-card page-heading">
+  <h1 class="mat-title">Users</h1>
+</div>
+
+<div class="mat-card">
+  
+  <!-- FILTER -->
+
+  <div class="row">
+    <div class="col-sm-8">
+      <app-search-filter [placeholder]="'Search by name, email'" (setSearch)="setSearch($event)"></app-search-filter>
+    </div>
+    <div class="col-sm-4">
+      <button class="filter_btn" mat-fab color="primary" matTooltip="Filter" type="button" (click)="showFilter=!showFilter">
+        <mat-icon>filter_list</mat-icon>
+      </button>
+    </div>
+    
+  </div>
+
+  <mat-expansion-panel class="adminFilter" [expanded]="showFilter">
+
+    <div class="mat_filter">
+      <form [formGroup]="userListingForm">
+        <div class="row">
+          <div class="col-sm-6">
+            <app-date-filter [dateObject]="filterObject.registrationDate">
+            </app-date-filter>
+          </div>
+          <div class="col-sm-3">
+            <app-dropdown-filter [dropdown]="filterObject.userType"></app-dropdown-filter>
+          </div>
+          <div class="col-sm-12">
+            <div class="form-btn text-center">
+              <button filter_btn mat-stroked-button [disabled]="disable()" (click)="resetFilter()"> Reset
+              </button>
+              <button filter_btn mat-raised-button color="primary" [disabled]="disable()" (click)="filter()">
+                Filter </button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+
+  </mat-expansion-panel>
+
+  <!-- /FILTER -->
+  
+  <!-- TABLE WRAPPER  -->
+  <div class="table-wrapper">
+    <table mat-table [dataSource]="userList" matSort (matSortChange)="sortData($event)">
+
+      <ng-container matColumnDef="select">
+        <th mat-header-cell *matHeaderCellDef>
+          <mat-checkbox color="primary" (change)="$event ? masterToggle() : null" [checked]="selection.hasValue() && isAllSelected()"
+            [indeterminate]="selection.hasValue() && !isAllSelected()">
+          </mat-checkbox>
+        </th>
+        <td mat-cell *matCellDef="let row">
+          <mat-checkbox color="primary" (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null"
+            [checked]="selection.isSelected(row)">
+          </mat-checkbox>
+        </td>
+      </ng-container>
+
+      <ng-container *ngIf="isNotification" matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef width="60px">
+          <mat-checkbox (change)="$event ? masterToggle() : null" [checked]="selection.hasValue() && isAllSelected()"
+            [indeterminate]="selection.hasValue() && !isAllSelected()" color="primary">
+          </mat-checkbox>
+        </th>
+        <td mat-cell *matCellDef="let row">
+          <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null"
+            [checked]="selection.isSelected(row)" color="primary">
+          </mat-checkbox>
+        </td>
+      </ng-container>
+
+      <!-- ID Column -->
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef> S. No </th>
+        <td mat-cell *matCellDef="let user;let i = index"> {{getSerialNumber(i+1)}} </td>
+      </ng-container>
+
+
+      <ng-container matColumnDef="profilePicture">
+        <th mat-header-cell *matHeaderCellDef class="white_space">
+          User ID
+        </th>
+        <td mat-cell *matCellDef="let user">
+          <!-- <div class="profile_pic"><img [src]="user.profilePicture|customImage:'assets/images/user.png'|async"
+              class="user-image" alt="User">
+          </div> -->
+          <a class="user-link"><span [routerLink]="[ 'USER_DETAIL'|absolutePath]">1234</span></a>
+        </td>
+      </ng-container>
+
+
+      <ng-container matColumnDef="fullName">
+        <th mat-header-cell mat-sort-header *matHeaderCellDef mat-sort-header>
+          Name
+        </th>
+        <td mat-cell *matCellDef="let user">
+          <span>
+            {{user.fullName}}
+          </span>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header class="white_space">
+          Email Address
+        </th>
+        <td mat-cell *matCellDef="let user">
+          {{user.email}}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="createdOn">
+        <th mat-header-cell mat-sort-header *matHeaderCellDef class="white_space">
+          Registration Date
+        </th>
+        <td mat-cell *matCellDef="let user"> {{user.createdOn|customDate}} </td>
+      </ng-container>
+
+
+      <ng-container matColumnDef="phone">
+        <th mat-header-cell *matHeaderCellDef class="text-center white_space">
+          Total Experiments
+        </th>
+        <td mat-cell *matCellDef="let user" class="text-center">
+          <a class="user-link">12</a>
+        </td>
+      </ng-container>
+
+
+      <ng-container matColumnDef="planType">
+        <th mat-header-cell *matHeaderCellDef class="text-center white_space">
+          Last Experiment Date
+        </th>
+        <td mat-cell *matCellDef="let user" class="text-center">
+          {{user.createdOn|customDate}}
+        </td>
+      </ng-container>
+
+
+      <!-- <ng-container matColumnDef="userType">
+        <th mat-header-cell *matHeaderCellDef class="white_space">
+          User Type
+        </th>
+        <td mat-cell *matCellDef="let user" class="">
+          {{ (user.emailVerified || user.phoneNo) ? 'Verified' : 'Unverified' }}
+        </td>
+      </ng-container> -->
+
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef class="text-center">
+          Status
+        </th>
+        <td mat-cell *matCellDef="let user" class="text-center">
+          {{ user.isActive ? 'Active' : 'Inactive' }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="action" *ngIf="!isNotification">
+        <th mat-header-cell *matHeaderCellDef class="white_space">
+          Action
+        </th>
+        <td mat-cell *matCellDef="let user">
+          <div class="action_btn">
+
+            <button mat-button matTooltip=" {{ user.isActive ? 'Block' : 'Unblock' }}"
+              (click)="changeStatus(user.isActive?'BLOCKED':'ACTIVE',user._id)">
+              <mat-icon>{{ user.isActive ? 'lock_open' : 'lock' }}</mat-icon>
+            </button>
+
+          </div>
+
+        </td>
+      </ng-container>
+
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let user; columns: displayedColumns;">
+      </tr>
+    </table>
+    <div *ngIf="userList.data.length==0">
+      <div class="_tableNoData">No Record Found</div>
+    </div>
+    
+  </div>
+  <mat-paginator *ngIf="userList.data.length" [length]="total" [pageIndex]="page-1" [pageSize]="pageSize"
+    [pageSizeOptions]="pageOptions" (page)="changePage($event)">
+  </mat-paginator>  
+  <!-- user listing -->
+</div>

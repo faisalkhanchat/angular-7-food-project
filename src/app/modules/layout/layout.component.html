@@ -1,0 +1,24 @@
+
+    <mat-toolbar color="primary" class="header">
+      <button class="menu-toggle" mat-button (click)="sidenav.toggle()">
+          <mat-icon class="hamburger"> menu </mat-icon>
+      </button>
+      <app-header></app-header>
+  </mat-toolbar>
+  
+  <mat-sidenav-container>
+
+      <!-- Sidenav -->
+      <mat-sidenav #sidenav [mode]="isBiggerScreen() ? 'over' : 'side'" [(opened)]="opened" [fixedInViewport]="true"  [fixedTopGap]>
+          <app-sidebar></app-sidebar>
+      </mat-sidenav>
+      <!-- /Sidenav -->
+
+      <!-- Main content -->
+      <mat-sidenav-content>
+          <!-- <app-breadcrumb></app-breadcrumb> -->
+          <router-outlet></router-outlet>
+      </mat-sidenav-content>
+      <!-- /Main content -->
+
+  </mat-sidenav-container>

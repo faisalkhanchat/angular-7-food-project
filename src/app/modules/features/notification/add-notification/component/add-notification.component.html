@@ -1,0 +1,74 @@
+<div class="page_heading">
+  <span [routerLink]="['NOTIFICATION'|absolutePath]"> Notification </span>
+  <mat-icon>arrow_forward_ios</mat-icon>
+  {{notificationId?'Edit':'Add'}} Notification
+</div>
+
+<div class="mat-card">
+  <div class="panel-header">
+    <h4>{{notificationId?'Edit':'Add'}} Notification</h4>
+  </div>
+
+  <form [formGroup]="addNotificationForm" (ngSubmit)="submitForm()">
+    <div class="row">
+      <div class="col-md-4 col-sm-6">
+        <app-input-files label="Add Image"></app-input-files>
+      </div>
+      <div class="col-md-8 col-sm-6">
+        <div class="form_group">
+          <mat-form-field>
+            <input matInput formControlName="title" placeholder="Title">
+            <mat-error>{{addNotificationForm.controls.title|validate:'Title'}}</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="form_group">
+          <mat-form-field>
+            <textarea matInput formControlName="body" placeholder="Message"></textarea>
+            <mat-error>{{addNotificationForm.controls.body|validate:'Message'}}</mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form_group">
+              <h4>Scheduled</h4>
+              <mat-radio-group formControlName="flag">
+                <mat-radio-button [value]="true">Send Now</mat-radio-button>
+                <mat-radio-button [value]="false">Send Later</mat-radio-button>
+              </mat-radio-group>
+            </div>
+          </div>
+          <div class="col-md-6" *ngIf="!flag">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form_group">
+                  <h4>Date And Time</h4>
+                  <mat-form-field>
+                    <input matInput readonly formControlName="scheduleOn" [owlDateTimeTrigger]="dt3" [owlDateTime]="dt3" placeholder="Select Date And Time">
+                    <owl-date-time  #dt3></owl-date-time>
+                    <mat-error *ngIf="!flag">{{addNotificationForm.controls.scheduleOn|validate:'Schedule Date'}}</mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <!-- row close -->
+  
+
+  <div class="page_heading mt-4">Select Users</div>
+  <app-user-listing [isNotification]="true"></app-user-listing>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="form-btn text-center">
+        <button mat-raised-button type="button" class="mb-2 mr-3" [routerLink]="['NOTIFICATION'|absolutePath]">Cancel</button>
+        <button mat-raised-button color="primary" class="mb-2 mr-3" type="submit">{{notificationId?'Update':(!flag?'Save':'Send')}}</button>
+      </div>
+    </div>
+  </div>
+</form>  
+</div>

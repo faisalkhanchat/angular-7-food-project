@@ -1,0 +1,25 @@
+.under_development {
+
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 100%;
+  min-height: 88vh;
+
+  .inr_blk {
+    text-align: center;
+
+    img {
+      margin: 0 auto;
+    }
+
+    .title {
+      font-size: 3rem;
+      @media (max-width:767px) {
+        font-size: 2rem;
+      }
+    }
+  }
+
+}

@@ -1,0 +1,70 @@
+@import 'var';
+.account_wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    height: 100%;
+    .left_banner {
+        flex-basis: 40%;
+        max-width: 40%;
+        background-color: var(--primary);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: url('../../../assets/default-image/bg_image.jpg') no-repeat center/cover;
+        position: relative;
+    
+        &::after{
+            background-color:rgba($black, 0.6);
+            content: '';
+            display: block;
+            height: 100%;
+            position: absolute;
+            width: 100%;
+          }
+    }
+    .right_form {
+        flex-basis: 60%;
+        max-width: 60%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+.form_wrap {
+    width: 400px;
+}
+.banner_wrap {
+    position: relative;
+    z-index: 2;
+}
+
+.logo_blk {
+    // background-color: #ffffff;
+    border-radius: 3px;
+    img {
+        max-width: 160px;
+        display: flex;
+    }
+}
+
+.textInfo {
+    margin-top: 40px;
+    color: #fff;
+    .mat-h1 {
+        font-weight: 600;
+    }
+    p {
+        font-size: 18px;
+        &::before {
+            content: '';
+            position: relative;
+            background: url(/assets/default-image/check.svg) center/20px no-repeat;
+            width: 22px;
+            height: 22px;
+            display: inline-block;
+            vertical-align: middle;
+            margin-right: 10px;
+        }
+    }
+}

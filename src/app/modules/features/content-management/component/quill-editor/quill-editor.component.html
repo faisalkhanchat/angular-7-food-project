@@ -1,0 +1,8 @@
+<form [formGroup]="contentForm">
+  <!-- <quill-editor placeholder="Enter text" [modules]="quillConfig" formControlName="content"
+                #quillQuestion></quill-editor> -->
+  <div class="buttons-wrapper">
+    <button mat-flat-button type="button" (click)="reset()">Reset</button>
+    <button mat-raised-button color="primary" type="submit">Save</button>
+  </div>
+</form>

@@ -1,0 +1,34 @@
+.exp-link {
+  color: #393ef1 !important;
+  text-decoration: underline !important;
+  cursor: pointer !important;
+}
+
+table th {
+  background: whitesmoke;
+}
+
+table tr:nth-child(odd) {
+  background: lightgrey;
+}
+
+table tr:nth-child(even) {
+  background: whitesmoke;
+}
+
+.mat-column-sn,
+.mat-column-fId,
+.mat-column-userName,
+.mat-column-deviceType,
+.mat-column-fDate {
+  border-right: 1px solid grey;
+  align-self: stretch;
+  text-align: center;
+}
+
+mat-icon {
+  vertical-align: middle;
+  color: skyblue;
+  width: 25%;
+  font-size: 15px;
+}

@@ -1,0 +1,53 @@
+<div class="page_heading">Feedback</div>
+
+<div class="feedback-table">
+  <mat-form-field>
+    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search">
+  </mat-form-field>
+
+  <div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource" matSort>
+
+      <!-- ID Column -->
+      <ng-container matColumnDef="sn">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> S.No </th>
+        <td mat-cell *matCellDef="let row; let i = index"> {{i+1}} </td>
+      </ng-container>
+
+      <!-- Experiment ID Column -->
+      <ng-container matColumnDef="fId">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Feedback ID </th>
+        <td mat-cell *matCellDef="let row">
+          <a class="exp-link"><span [routerLink]="[ 'FEEDBACK_DETAIL'|absolutePath]">{{row.fId}}</span></a>
+        </td>
+      </ng-container>
+
+      <!-- Satart date Column -->
+      <ng-container matColumnDef="userName">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> User Name </th>
+        <td mat-cell *matCellDef="let row"> {{row.userName}} </td>
+      </ng-container>
+
+      <!-- End date Column -->
+      <ng-container matColumnDef="deviceType">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Device Type </th>
+        <td mat-cell *matCellDef="let row"> {{row.deviceType}} </td>
+      </ng-container>
+
+      <!-- Duration Column -->
+      <ng-container matColumnDef="fDate">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Feedback Date </th>
+        <td mat-cell *matCellDef="let row">
+          <span>{{row.fDate}}</span>
+          <mat-icon>visibility</mat-icon>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+      </tr>
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+  </div>
+</div>

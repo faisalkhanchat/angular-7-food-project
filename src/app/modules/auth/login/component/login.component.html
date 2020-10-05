@@ -1,0 +1,29 @@
+<div class="form_wrapper">
+
+    <div class="mat-h2">Welcome to Admin Login</div>
+    <div class="mat-h3">Enter your details below to access your account.</div>
+
+    <form [formGroup]="loginForm" (ngSubmit)="loginForm.valid&&login()">
+
+      <mat-form-field appearance="outline">
+        <mat-label>Email Address</mat-label>
+        <input matInput required formControlName="email">
+        <mat-error>{{getControl('email')|validate:'email'}}</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Password</mat-label>
+        <input matInput required formControlName="password" [type]="hide ? 'password' :'text'">
+        <mat-error>{{getControl('password')|validate:'password'}}</mat-error>
+        <mat-icon matSuffix (click)="hide= !hide">{{hide ? 'visibility_off' :'visibility'}}</mat-icon>
+      </mat-form-field>
+
+      <div class="btn_groups">
+        <button mat-raised-button type="submit" color="primary">Login</button>
+        <button mat-button type="button" class="forgor_password" [routerLink]="'FORGOT_PASSWORD'|absolutePath">
+          Forgot Password
+        </button>
+      </div>
+
+    </form>
+    
+</div>

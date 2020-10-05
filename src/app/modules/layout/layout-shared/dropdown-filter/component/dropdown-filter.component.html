@@ -1,0 +1,7 @@
+<h4 class="mat-h4" >{{dropdown.label}}</h4>
+<mat-form-field>
+  <mat-select [placeholder]="dropdown.label" [formControl]="dropdown.control">
+    <mat-option [value]="''">All</mat-option>
+    <mat-option *ngFor="let item of dropdown.list" [value]="item.value">{{item.viewValue}}</mat-option>
+  </mat-select>
+</mat-form-field>

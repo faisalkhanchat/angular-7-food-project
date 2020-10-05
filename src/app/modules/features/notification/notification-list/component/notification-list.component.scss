@@ -1,0 +1,9 @@
+@import 'grid';
+@import 'mix';
+
+@include page-heading;
+@include btn_groups;
+
+.btn_groups {
+    text-align: right;
+}

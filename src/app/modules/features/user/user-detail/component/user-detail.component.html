@@ -1,0 +1,181 @@
+<div class="mat-card page-heading">
+  <h1 class="mat-title">User Detail</h1>
+</div>
+
+<div class="mat-card info_data">
+  <div class="row">
+
+    <div class="col-sm-4">
+      <div class="info_single">
+        <div class="label"> User ID </div>
+        <div class="value"> 1234 </div>
+      </div>
+    </div>
+
+    <div class="col-sm-4">
+      <div class="info_single">
+        <div class="label"> Name </div>
+        <div class="value"> Samantha clark </div>
+      </div>
+    </div>
+
+    <div class="col-sm-4">
+      <div class="info_single">
+        <div class="label"> Email Address </div>
+        <div class="value"> xyz12@abc.com </div>
+      </div>
+    </div>
+
+    <div class="col-sm-4">
+      <div class="info_single">
+        <div class="label"> Date of Registration </div>
+        <div class="value"> 29/10/2019 </div>
+      </div>
+    </div>
+
+    <div class="col-sm-4">
+      <div class="info_single">
+        <div class="label"> Last Experiment Date </div>
+        <div class="value"> 11/11/2019 </div>
+      </div>
+    </div>
+
+    <div class="col-sm-4">
+      <div class="info_single">
+        <div class="label"> Total Experiments </div>
+        <div class="value"> 36 </div>
+      </div>
+    </div>
+
+
+  </div>
+</div>
+
+<div class="mat-card">
+  <mat-tab-group>
+    <mat-tab label="Printer">
+      <div class="experiment-table">
+        <mat-form-field>
+          <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search">
+        </mat-form-field>
+
+        <div class="table-wrapper">
+          <table mat-table [dataSource]="dataSource" matSort>
+
+            <!-- ID Column -->
+            <ng-container matColumnDef="sn">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> S.No </th>
+              <td mat-cell *matCellDef="let row; let i = index"> {{i+1}} </td>
+            </ng-container>
+
+            <!-- Experiment ID Column -->
+            <ng-container matColumnDef="eId">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Experiment ID </th>
+              <td mat-cell *matCellDef="let row">
+                <a class="exp-link"><span>{{row.eId}}</span></a>
+              </td>
+            </ng-container>
+
+            <!-- Satart date Column -->
+            <ng-container matColumnDef="sDate">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Start Date </th>
+              <td mat-cell *matCellDef="let row"> {{row.sDate}} </td>
+            </ng-container>
+
+            <!-- End date Column -->
+            <ng-container matColumnDef="eDate">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> End Date </th>
+              <td mat-cell *matCellDef="let row"> {{row.eDate}} </td>
+            </ng-container>
+
+            <!-- Duration Column -->
+            <ng-container matColumnDef="duration">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Duration </th>
+              <td mat-cell *matCellDef="let row"> {{row.duration}}hrs </td>
+            </ng-container>
+
+            <!-- Printer Column -->
+            <ng-container matColumnDef="printer">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Printer </th>
+              <td mat-cell *matCellDef="let row"> {{row.printer}} </td>
+            </ng-container>
+
+            <!-- Status Column -->
+            <ng-container matColumnDef="status">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
+              <td mat-cell *matCellDef="let row"> {{row.status}} </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+            </tr>
+          </table>
+
+          <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+        </div>
+      </div>
+    </mat-tab>
+    <mat-tab label="Microscope">
+      <div class="experiment-table">
+        <mat-form-field>
+          <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search">
+        </mat-form-field>
+
+        <div class="table-wrapper">
+          <table mat-table [dataSource]="dataSource" matSort>
+
+            <!-- ID Column -->
+            <ng-container matColumnDef="sn">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> S.No </th>
+              <td mat-cell *matCellDef="let row; let i = index"> {{i+1}} </td>
+            </ng-container>
+
+            <!-- Experiment ID Column -->
+            <ng-container matColumnDef="eId">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Experiment ID </th>
+              <td mat-cell *matCellDef="let row">
+                <a class="exp-link"><span>{{row.eId}}</span></a>
+              </td>
+            </ng-container>
+
+            <!-- Satart date Column -->
+            <ng-container matColumnDef="sDate">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Start Date </th>
+              <td mat-cell *matCellDef="let row"> {{row.sDate}} </td>
+            </ng-container>
+
+            <!-- End date Column -->
+            <ng-container matColumnDef="eDate">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> End Date </th>
+              <td mat-cell *matCellDef="let row"> {{row.eDate}} </td>
+            </ng-container>
+
+            <!-- Duration Column -->
+            <ng-container matColumnDef="duration">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Duration </th>
+              <td mat-cell *matCellDef="let row"> {{row.duration}}hrs </td>
+            </ng-container>
+
+            <!-- Printer Column -->
+            <ng-container matColumnDef="printer">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Microscope </th>
+              <td mat-cell *matCellDef="let row"> {{row.printer}} </td>
+            </ng-container>
+
+            <!-- Status Column -->
+            <ng-container matColumnDef="status">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
+              <td mat-cell *matCellDef="let row"> {{row.status}} </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+            </tr>
+          </table>
+
+          <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+        </div>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+</div>

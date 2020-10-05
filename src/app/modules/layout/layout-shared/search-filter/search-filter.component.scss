@@ -1,0 +1,10 @@
+.search_filter .mat-form-field-suffix .mat-icon{
+    color: #333 !important;
+}
+.searchAction {
+    display: flex;
+    height: 40px;
+    .clear{
+        transform: scale(0.8);
+    }
+}

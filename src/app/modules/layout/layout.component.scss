@@ -1,0 +1,53 @@
+@import 'mix';
+
+:host {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+.mat-toolbar {
+    padding: 0;
+    z-index: 999;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+.mat-sidenav{
+    width: 280px;
+    z-index: 99;
+}
+
+.mat-sidenav-content {
+    padding: 15px;
+}
+.mat-sidenav-container{
+    flex: 1;
+    padding-top: 64px;
+    background-color: rgba(var(--primary), 0.05);
+}
+
+.header{
+    .menu-toggle{
+        width: 56px;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 10px;
+        cursor: pointer;
+        border-right: 1px solid rgba(#ffffff, 0.1);
+        .mat-icon{
+            height: 30px;
+            width: 30px;
+            font-size: 30px;
+        }
+        @media (max-width:576px) {
+            width: 56px;
+            min-width: 56px;
+            margin-right: 5px;;
+        }
+    }
+    app-header{
+        flex: 1;
+    }
+}

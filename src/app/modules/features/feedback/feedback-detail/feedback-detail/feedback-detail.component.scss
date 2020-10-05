@@ -1,0 +1,42 @@
+.heading {
+  mat-card {
+    padding: 0;
+    border: 0;
+
+    .container-fluid {
+      border: 1px solid;
+      background: lightgrey;
+      padding: 10px;
+    }
+
+    span {
+      color: black;
+    }
+    .detail-div {
+      margin: 50px;
+
+      .info {
+        padding-bottom: 50px;
+      }
+      .col-sm-4, .col-sm-11 {
+        display: flex;
+        justify-content: space-between;
+        flex-direction: column;
+
+        span {
+          margin: 10px 0 10px 0;
+        }
+
+        h4 {
+          color: blue;
+        }
+      }
+    }
+  }
+}
+
+.exp-link {
+  color: #393ef1 !important;
+  text-decoration: underline !important;
+  cursor: pointer !important;
+}

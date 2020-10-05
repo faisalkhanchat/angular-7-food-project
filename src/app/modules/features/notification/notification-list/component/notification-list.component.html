@@ -1,0 +1,137 @@
+<div class="mat-card page-heading">
+  <div class="mat-title"> Notification </div>
+</div>
+
+<div class="mat-card">
+  <div class="row">
+    <div class="col-sm-8">
+      <app-search-filter [placeholder]="'Search by title , message'" (setSearch)="setSearch($event)">
+      </app-search-filter>
+    </div>
+    <div class="col-sm-4">
+      <div class="btn_groups">
+        <button mat-fab color="primary" matTooltip="Filter" (click)="showFilter=!showFilter">
+          <mat-icon>filter_list</mat-icon>
+        </button>
+        <button mat-fab color="primary" matTooltip="Add Notification" [routerLink]="['ADD_NOTIFICATION'|absolutePath]">
+          <mat-icon>add</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- FILTER -->
+  <mat-expansion-panel class="adminFilter" [expanded]="showFilter">
+    <div class="mat_filter">
+      <form [formGroup]="notificationListingForm">
+        <div class="row">
+          <div class="col-sm-6">
+              <app-date-filter [dateObject]="filterObject.notificationDate">
+              </app-date-filter>
+          </div>
+
+          <div class="col-sm-6">
+              <app-date-filter [dateObject]="filterObject.scheduleDate">
+              </app-date-filter>
+          </div>
+
+          <div class="col-sm-3">
+            <app-dropdown-filter [dropdown]="filterObject.platform"></app-dropdown-filter>
+          </div>
+
+          <div class="col-sm-3">
+            <app-dropdown-filter [dropdown]="filterObject.status"></app-dropdown-filter>
+          </div>
+        </div>
+        <!-- row close -->
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="form-btn text-center">
+              <button filter_btn mat-stroked-button [disabled]="disable()" (click)="resetFilter()"> Reset </button>
+              <button filter_btn mat-raised-button color="primary"
+                [disabled]="disable()" (click)="filter()"> Filter </button>
+            </div>
+          </div>
+        </div>
+      </form>
+      <!-- row close -->
+    </div>
+  </mat-expansion-panel>
+  <!-- /FILTER -->
+
+
+  <div class="table-wrapper">
+    <table mat-table [dataSource]="notificationList" matSort (matSortChange)="sortData($event)">
+
+      <!-- Position Column -->
+      <ng-container matColumnDef="position">
+        <th mat-header-cell *matHeaderCellDef> No. </th>
+        <td mat-cell *matCellDef="let element;let i = index"> {{getSerialNumber(i+1)}} </td>
+      </ng-container>
+
+      <!-- Class Category Column -->
+      <ng-container matColumnDef="title">
+        <th mat-header-cell mat-sort-header *matHeaderCellDef> Notification Title </th>
+        <td mat-cell *matCellDef="let element"> {{element.title}} </td>
+      </ng-container>
+      <ng-container matColumnDef="body">
+        <th mat-header-cell *matHeaderCellDef> Message </th>
+        <td mat-cell *matCellDef="let element"> {{element.body}} </td>
+      </ng-container>
+      <!-- Date of Upload Column -->
+      <ng-container matColumnDef="platform">
+        <th mat-header-cell *matHeaderCellDef> Platform Type </th>
+        <td mat-cell *matCellDef="let element"> {{element.platform|titlecase}} </td>
+      </ng-container>
+
+      <!-- Uploaded by Column -->
+      <ng-container matColumnDef="createdOn">
+        <th mat-header-cell mat-sort-header *matHeaderCellDef> Created On </th>
+        <td mat-cell *matCellDef="let element"> {{element.createdOn|customDate}}</td>
+      </ng-container>
+
+      <!-- Uploaded by Column -->
+      <ng-container matColumnDef="scheduleOn">
+        <th mat-header-cell mat-sort-header *matHeaderCellDef> Scheduled On </th>
+        <td mat-cell *matCellDef="let element"> {{element.scheduleOn|customDate}} </td>
+      </ng-container>
+
+      <!-- Uploaded by Column -->
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef> Status </th>
+        <td mat-cell *matCellDef="let element">{{element.status}}</td>
+      </ng-container>
+
+      <!-- Action Column -->
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef> Action </th>
+        <td mat-cell *matCellDef="let element">
+          <div class="table-action">
+            <button class="btn" mat-icon-button color="primary" matTooltip="Edit" [routerLink]="['EDIT_NOTIFICATION'|absolutePath,element._id]">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <!-- <button class="btn" mat-icon-button color="primary"  matTooltip="Send" class="send-icon">
+              <mat-icon>reply</mat-icon>
+            </button> -->
+            <button  class="btn" mat-icon-button color="primary" matTooltip="Delete" (click)="deleteNotification(element._id)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <div *ngIf="notificationList.data.length==0">
+      <h3 style="text-align: center;padding: 10px">No Record Found</h3>
+    </div>
+
+    <mat-paginator *ngIf="notificationList.data.length" [length]="total" [pageIndex]="page-1" [pageSize]="pageSize"
+      [pageSizeOptions]="pageOptions" (page)="changePage($event)">
+    </mat-paginator>
+  </div>
+
+
+</div>

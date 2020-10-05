@@ -1,0 +1,29 @@
+quill-editor {
+  margin: 2px 0;
+  display: block;
+  height: 60vh;
+  overflow-y: auto;
+}
+
+.ql-toolbar.ql-snow {
+  padding: 2px !important;
+}
+
+.ql-toolbar {
+  position: fixed;
+  top: 0;
+}
+
+.ql-editor {
+  padding: 8px 8px !important;
+  color: #000000;
+  word-break: break-all
+}
+
+.ql-editor.ql-blank::before {
+  left: 8px !important
+}
+
+.buttons-wrapper {
+  text-align: center;
+}
