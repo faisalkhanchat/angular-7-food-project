@@ -1,3 +1,4 @@
+import { AuthService } from './../../auth.service';
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {LoginService} from '../service/login.service';
@@ -14,7 +15,7 @@ export class LoginComponent implements OnInit {
     hide = true;
     loginForm: FormGroup;
 
-    constructor(private loginService: LoginService, private formBuilder: FormBuilder) {
+    constructor(private loginService: LoginService, private formBuilder: FormBuilder, private authService: AuthService) {
     }
 
     ngOnInit() {
@@ -46,12 +47,16 @@ export class LoginComponent implements OnInit {
         }
         const data = {...this.loginForm.value};
         this.loginForm.disable();
-        this.loginService.login(data).subscribe(
-            response => {
-            },
-            err => {
-                this.loginForm.enable();
-            }
-        );
+        console.log(data);
+        // this.authService.login(data).then(response => {
+        //     console.log(response);
+        // })
+        // this.loginService.login(data).subscribe(
+        //     response => {
+        //     },
+        //     err => {
+        //         this.loginForm.enable();
+        //     }
+        // );
     }
 }

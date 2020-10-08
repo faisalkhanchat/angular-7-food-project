@@ -1,4 +1,4 @@
-@import 'var';
+@import "var";
 .account_wrapper {
     display: flex;
     flex-wrap: wrap;
@@ -10,17 +10,17 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        background: url('../../../assets/default-image/bg_image.jpg') no-repeat center/cover;
+        background: url("../../../assets/default-image/bg_image.jpg") no-repeat center/cover;
         position: relative;
-    
-        &::after{
-            background-color:rgba(var(--black), 0.6);
-            content: '';
+
+        &::after {
+            background-color: rgba(0, 0, 0, 0.6);
+            content: "";
             display: block;
             height: 100%;
             position: absolute;
             width: 100%;
-          }
+        }
     }
     .right_form {
         flex-basis: 60%;
@@ -57,7 +57,7 @@
     p {
         font-size: 18px;
         &::before {
-            content: '';
+            content: "";
             position: relative;
             background: url(/assets/default-image/check.svg) center/20px no-repeat;
             width: 22px;
