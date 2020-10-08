@@ -14,7 +14,7 @@
         position: relative;
     
         &::after{
-            background-color:rgba($black, 0.6);
+            background-color:rgba(var(--black), 0.6);
             content: '';
             display: block;
             height: 100%;

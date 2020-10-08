@@ -15,7 +15,7 @@ import { ValidationErrorPipeModule } from 'src/app/pipes/validation-error/valida
 import { LoginService } from './service/login.service';
 
 const routes: Routes = [
-  {path: '', component: LoginComponent,canActivate:[AccountGuard] }
+  { path: '', component: LoginComponent, canActivate: [AccountGuard] }
 ];
 
 @NgModule({
@@ -31,6 +31,6 @@ const routes: Routes = [
     ValidationErrorPipeModule
   ],
   declarations: [LoginComponent],
-  providers:[LoginService]
+  providers: [LoginService]
 })
 export class LoginModule { }
